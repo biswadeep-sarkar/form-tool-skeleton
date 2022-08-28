@@ -9,7 +9,7 @@ This skeleton will provide you a boost start with our [FormTool](https://github.
 ### Step 1:
 Download or clone this skeleton
 ```
-git clone https://github.com/biswadeep-sarkar/form-tool-skeleton.git your-project-name
+git clone https://github.com/biswadeep-sarkar/form-tool-skeleton.git **your-project-name**
 ```
 
 ### Step 2:
