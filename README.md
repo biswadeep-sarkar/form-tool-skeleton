@@ -1,10 +1,10 @@
 # FormTool Skeleton
 
-This skeleton will provide you a boost start with our <a href="https://github.com/biswadeep-sarkar/form-tool" target="blank">FormTool package</a>. The skeleton is based on AdminLTE 2.x.
+This skeleton will provide you a boost start with our <a href="https://github.com/biswadeep-sarkar/form-tool" target="_blank">FormTool</a> package. The skeleton is based on AdminLTE 2.x.
 
 This package still under primary development.
 
-## Setps
+## Steps to Setup
 
 ### Step 1:
 Download or clone this skeleton
@@ -34,6 +34,7 @@ composer require biswadeep/form-tool
 ```
 
 ### Step 4:
+Copy the vendor config file only
 ```
 php artisan vendor:publish --provider="biswadeep\form-tool\FormToolServiceProvider" --tag=config
 ```
@@ -47,12 +48,10 @@ mv temp/.git project/.git
 rm -rf temp
 ```
 
-## What's modified?
+## What's modified from fresh Laravel project?
 - Added assets under public/assets directory
 - Removed default migrations files
 - Modified README.md
-
-Thanks
 
 ## Disclaimer
 This package is in early access.
