@@ -28,7 +28,7 @@ php artisan key:generate
 ```
 
 ### Step 3:
-Create database and ***setup the database connection*** in the .env file
+Create database and **setup the database connection** in the .env file
 
 ### Step 4:
 Run this command to install form-tool
@@ -45,7 +45,8 @@ php artisan vendor:publish --provider="Biswadeep\FormTool\FormToolServiceProvide
 ### Step 6:
 Modify login email and password in "database\seeders\UserSeeder.php"
 Default credential:
-> Email: admin@gmail.com
+> Email: `admin@gmail.com`
+>
 > Password: form12345
 
 ### Step 7:
@@ -53,6 +54,7 @@ Run the migration with seeder:
 ```
 php artisan migrate --seed
 ```
+Great! You are done now open your project.
 
 ## How to update the skeleton?
 You can just always copy and replace all the files.
@@ -63,7 +65,7 @@ mv temp/.git project/.git
 rm -rf temp
 ```
 
-## What's modified from fresh Laravel project?
+## What's modified from fresh a Laravel project?
 - Modified "boot" method in "app\Providers\AppServiceProvider.php"
 - Under "database" directory
   - Removed default migrations files
