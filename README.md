@@ -2,7 +2,7 @@
 
 This skeleton will provide you a boost start with our <a href="https://github.com/biswadeep-sarkar/form-tool" target="_blank">FormTool</a> package. The skeleton is based on AdminLTE 2.x.
 
-This package still under primary development.
+*This package still under primary development.*
 
 ## Steps to Setup
 
