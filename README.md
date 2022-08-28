@@ -43,11 +43,11 @@ php artisan vendor:publish --provider="Biswadeep\FormTool\FormToolServiceProvide
 ```
 
 ### Step 6:
-Modify login email and password in "database\seeders\UserSeeder.php"
+Modify login email and password in "database\seeders\UserSeeder.php"<br>
 Default credential:
 > Email: `admin@gmail.com`
 >
-> Password: form12345
+> Password: `form12345`
 
 ### Step 7:
 Run the migration with seeder:
@@ -57,7 +57,7 @@ php artisan migrate --seed
 Great! You are done now open your project.
 
 ## How to update the skeleton?
-You can just always copy and replace all the files.
+You can just always copy and replace all the files.<br>
 I will show you a git clone process, let's assume your root directory named as "project":
 ```
 git clone https://github.com/biswadeep-sarkar/form-tool-skeleton.git temp
