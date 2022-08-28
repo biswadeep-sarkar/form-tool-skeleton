@@ -2,6 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Middlewares
+use Biswadeep\FormTool\Http\Middleware\AdminAuth;
+
+// Controllers
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DemoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +22,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+/* FormTool Admin Routes */
+Route::group(['prefix' => config('form-tool.adminURL'), 'middleware' => [AdminAuth::class]], function () {
+
+    Route::get('dashboard', [DashboardController::class, 'index']);
+    Route::resource('demo-pages', DemoController::class);
+
 });

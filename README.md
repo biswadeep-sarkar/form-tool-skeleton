@@ -1,6 +1,6 @@
 # FormTool Skeleton
 
-This skeleton will provide you a boost start with our <a href="https://github.com/biswadeep-sarkar/form-tool" target="_blank">FormTool</a> package. The skeleton is based on AdminLTE 2.x.
+This skeleton will provide you a boost start with our [FormTool](https://github.com/biswadeep-sarkar/form-tool) package. The skeleton is based on AdminLTE 2.x.
 
 *This package still under primary development.*
 
@@ -13,7 +13,7 @@ git clone https://github.com/biswadeep-sarkar/form-tool-skeleton.git your-projec
 ```
 
 ### Step 2:
-Create .env file and setup the database connection. You can run this command in the root directory!
+Copy .env file, you can run this command in the root directory
 
 For Windows :
 ```
@@ -28,15 +28,30 @@ php artisan key:generate
 ```
 
 ### Step 3:
+Create database and ***setup the database connection*** in the .env file
+
+### Step 4:
 Run this command to install form-tool
 ```
 composer require biswadeep/form-tool
 ```
 
-### Step 4:
+### Step 5:
 Copy the vendor config file only
 ```
-php artisan vendor:publish --provider="biswadeep\form-tool\FormToolServiceProvider" --tag=config
+php artisan vendor:publish --provider="Biswadeep\FormTool\FormToolServiceProvider" --tag=config
+```
+
+### Step 6:
+Modify login email and password in "database\seeders\UserSeeder.php"
+Default credential:
+> Email: admin@gmail.com
+> Password: form12345
+
+### Step 7:
+Run the migration with seeder:
+```
+php artisan migrate --seed
 ```
 
 ## How to update the skeleton?
@@ -49,8 +64,22 @@ rm -rf temp
 ```
 
 ## What's modified from fresh Laravel project?
-- Added assets under public/assets directory
-- Removed default migrations files
+- Modified "boot" method in "app\Providers\AppServiceProvider.php"
+- Under "database" directory
+  - Removed default migrations files
+  - Added "create_demo_pages_table" migration *(For demo purpose, you can delete this)*
+  - Modified seeders\DatabaseSeeder.php
+  - Added UserSeeder.php under "database\seeders"
+- Added Controllers:
+  - Admin\AdminControllers.php
+  - Admin\DashboardController.php
+  - Admin\DemoController.php *(For demo purpose, you can delete this)*
+- Added Models:
+  - Admin\DemoModel.php *(For demo purpose, you can delete this)*
+- Added Views:
+  - admin\dashboard.blade.php
+- Modified "routes\web.php"
+- Added assets under "public/assets" directory
 - Modified README.md
 
 ## Disclaimer
