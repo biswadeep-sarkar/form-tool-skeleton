@@ -1,6 +1,6 @@
 # FormTool Skeleton
 
-This skeleton will provide you a boost start with our [FormTool](https://github.com/biswadeep-sarkar/form-tool) package. The skeleton is based on AdminLTE 2.x.
+This skeleton will provide you a boost start with our [FormTool](https://github.com/biswadeep-sarkar/form-tool) package, which is also a dependency for this package. This skeleton is based on Laravel 8.83.23 and AdminLTE 2.x.
 
 *This package still under primary development.*
 
@@ -58,7 +58,7 @@ Here is a hacky way with the git clone process that will work from your project'
 Windows:
 ```
 git clone https://github.com/biswadeep-sarkar/form-tool-skeleton.git temp
-xcopy /e /h /y temp .
+xcopy /e /c /y temp .
 rmdir temp -Recurse -Force
 ```
 Mac/Linux:
