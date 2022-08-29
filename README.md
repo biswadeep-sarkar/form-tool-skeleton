@@ -52,13 +52,14 @@ php artisan migrate --seed
 Great! You are done now open your project.
 
 ## How to update the skeleton?
-You can just always copy and replace all the files.<br>
-I will show you a git clone process, let's assume your root directory named as "project":<br />
+You can just always download, copy and replace all the files.<br>
+Here is a git clone process that will work from your project's root directory:
+
 Windows:
 ```
 git clone https://github.com/biswadeep-sarkar/form-tool-skeleton.git temp
 xcopy /e /h /y temp .
-RMDIR temp -Recurse -Force
+rmdir temp -Recurse -Force
 ```
 Mac:
 ```
