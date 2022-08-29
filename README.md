@@ -67,6 +67,7 @@ git clone https://github.com/biswadeep-sarkar/form-tool-skeleton.git temp
 mv -rf temp/.* ../
 rm -rf temp
 ```
+Here we are cloning this repository into a temp folder. Then coping/moving all the files into our project and then deleted the temp folder.
 
 ## How to update the FormTool?
 ```
