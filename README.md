@@ -7,7 +7,7 @@ This skeleton will provide you a boost start with our [FormTool](https://github.
 ## Steps to Setup
 
 ### Step 1:
-Download or clone this skeleton and set it up
+Download or clone this skeleton and set it up *(git command will only run if you have git installed)*
 ```
 git clone https://github.com/biswadeep-sarkar/form-tool-skeleton.git your-project-name
 cd your-project-name
@@ -15,15 +15,8 @@ composer install
 ```
 
 ### Step 2:
-Copy .env file, you can run this command in the root directory
+Copy .env file and generate key, you can run this command in the root directory
 
-For Windows :
-```
-copy .env.example .env
-php artisan key:generate
-```
-
-For Mac:
 ```
 cp .env.example .env
 php artisan key:generate
@@ -60,11 +53,23 @@ Great! You are done now open your project.
 
 ## How to update the skeleton?
 You can just always copy and replace all the files.<br>
-I will show you a git clone process, let's assume your root directory named as "project":
+I will show you a git clone process, let's assume your root directory named as "project":<br />
+Windows:
 ```
 git clone https://github.com/biswadeep-sarkar/form-tool-skeleton.git temp
-mv temp/.git project/.git
+xcopy /e /h /y temp .
+RMDIR temp -Recurse -Force
+```
+Mac:
+```
+git clone https://github.com/biswadeep-sarkar/form-tool-skeleton.git temp
+mv -rf temp/.* ../
 rm -rf temp
+```
+
+## How to update the FormTool?
+```
+composer update biswadeep/form-tool
 ```
 
 ## What's modified from fresh a Laravel project?
