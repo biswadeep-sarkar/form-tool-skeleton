@@ -61,7 +61,7 @@ git clone https://github.com/biswadeep-sarkar/form-tool-skeleton.git temp
 xcopy /e /h /y temp .
 rmdir temp -Recurse -Force
 ```
-Mac:
+Mac/Linux:
 ```
 git clone https://github.com/biswadeep-sarkar/form-tool-skeleton.git temp
 mv -rf temp/.* ../
