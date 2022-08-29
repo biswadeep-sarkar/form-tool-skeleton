@@ -16,10 +16,10 @@ class CreateDemoPagesTable extends Migration
         Schema::create('demo_pages', function (Blueprint $table) {
             $table->id('pageId');
             $table->string('title');
-            $table->string('slug');
-            $table->text('content');
-            $table->string('author');
-            $table->string('image');
+            $table->string('slug')->nullable();
+            $table->text('content')->nullable();
+            $table->string('author')->nullable();
+            $table->string('image')->nullable();
             $table->boolean('status');
             
             $table->integer('updatedBy')->nullable();
