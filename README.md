@@ -53,7 +53,7 @@ Great! You are done now open your project.
 
 ## How to update the skeleton?
 You can just always download, copy and replace all the files.<br>
-Here is a git clone process that will work from your project's root directory:
+Here is a hacky way with the git clone process that will work from your project's root directory:
 
 Windows:
 ```
