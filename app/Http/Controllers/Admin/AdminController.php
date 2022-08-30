@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\CommonModel;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
-use Request;
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
@@ -32,7 +31,7 @@ class AdminController extends Controller
                     if ($activeLink == $row2[0]) {
                         $active = true;
                     }
-                } 
+                }
                 if ($flag) {
                     if ($active) {
                         $row[2] = 'active';

@@ -51,7 +51,11 @@ php artisan migrate --seed
 ```
 Great! You are done now open your project.
 
+
 ## How to update the skeleton?
+You need to manually update the files.
+<!-- DON'T USE THE BELOW METHOD
+
 You can just always download, copy and replace all the files.<br>
 Here is a hacky way with the git clone process that will work from your project's root directory:
 
@@ -68,6 +72,7 @@ mv -rf temp/.* ../
 rm -rf temp
 ```
 Here we are cloning this repository into a temp folder. Then coping/moving all the files into our project and then deleted the temp folder.
+-->
 
 ## How to update the FormTool?
 ```
