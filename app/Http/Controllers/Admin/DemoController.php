@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use Biswadeep\FormTool\Http\Libraries\Crud;
 use App\Models\Admin\DemoModel;
+use Biswadeep\FormTool\Http\Libraries\Crud;
+use Illuminate\Http\Request;
 
 class DemoController extends AdminController
 {
@@ -17,8 +17,7 @@ class DemoController extends AdminController
 
     public function __construct()
     {
-        Crud::createModel($this, DemoModel::class, function($input)
-        {
+        Crud::createModel($this, DemoModel::class, function ($input) {
             $input->text('title')->required();
             $input->text('slug')->slug();
             $input->textarea('content');
@@ -26,7 +25,7 @@ class DemoController extends AdminController
             $input->image('image')->path('demo');
             $input->select('status')->noFirst()->options([
                 1 => 'Active',
-                0 => 'Inactive'
+                0 => 'Inactive',
             ]);
         });
     }
@@ -40,35 +39,31 @@ class DemoController extends AdminController
 
     public function create(Request $request)
     {
-        $data['title'] = 'Add ' . $this->singularTitle;
+        $data['title'] = 'Add '.$this->singularTitle;
 
         return $this->render('form-tool::crud.data_form', $data);
     }
 
     public function store(Request $request)
     {
-        
     }
 
     public function show($id)
     {
-        
     }
 
     public function edit(Request $request, $id)
     {
-        $data['title'] = 'Edit ' . $this->singularTitle;
+        $data['title'] = 'Edit '.$this->singularTitle;
 
         return $this->render('form-tool::crud.data_form', $data);
     }
 
     public function update(Request $request, $id)
     {
-
     }
 
     public function destroy($id)
     {
-        
     }
 }
