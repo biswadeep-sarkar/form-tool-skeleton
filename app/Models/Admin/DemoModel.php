@@ -2,10 +2,10 @@
 
 namespace App\Models\Admin;
 
-use Biswadeep\FormTool\Models\AdminModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Biswadeep\FormTool\Models\AdminModel;
 
 class DemoModel extends AdminModel
 {
