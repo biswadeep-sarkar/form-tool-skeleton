@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Biswadeep\FormTool\Http\Libraries\Crud;
+use Biswadeep\FormTool\Core\Crud;
 use App\Models\Admin\DemoModel;
 
 class DemoController extends AdminController
