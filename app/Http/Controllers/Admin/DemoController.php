@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Biswadeep\FormTool\Core\Crud;
+use Biswadeep\FormTool\Core\Doc;
 use App\Models\Admin\DemoModel;
 
 class DemoController extends AdminController
@@ -17,7 +17,7 @@ class DemoController extends AdminController
 
     public function __construct()
     {
-        Crud::createModel($this, DemoModel::class, function($input)
+        Doc::create($this, DemoModel::class, function($input)
         {
             $input->text('title')->required();
             $input->text('slug')->slug();
@@ -28,7 +28,7 @@ class DemoController extends AdminController
                 1 => 'Active',
                 0 => 'Inactive'
             ]);
-        });
+        })->run();
     }
 
     public function index()

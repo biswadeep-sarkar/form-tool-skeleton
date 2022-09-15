@@ -8,6 +8,8 @@ use Biswadeep\FormTool\Http\Middleware\AdminAuth;
 // Controllers
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DemoController;
+use App\Http\Controllers\Admin\ChangePasswordController;
+use App\Http\Controllers\Admin\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,12 @@ Route::get('/', function () {
 Route::group(['prefix' => config('form-tool.adminURL'), 'middleware' => [AdminAuth::class]], function () {
 
     Route::get('dashboard', [DashboardController::class, 'index']);
+
     Route::resource('demo-pages', DemoController::class);
 
+    Route::get('/change-password', [ChangePasswordController::class, 'index']);
+    Route::put('change-password/{id}', [ChangePasswordController::class, 'update']);
+
+    Route::get('users/search', [UsersController::class, 'search']);
+    Route::resource('users', UsersController::class);
 });

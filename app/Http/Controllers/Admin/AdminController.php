@@ -12,10 +12,16 @@ class AdminController extends Controller
     {
         $sideMenu['Dashboard']          = ['dashboard', 'fa fa-dashboard'];
         $sideMenu['Demo Pages']         = ['demo-pages', 'fa fa-bars'];
+        $sideMenu['Users']              = ['users', 'fa fa-users'];
         $sideMenu['Demo Nested Link']   = ['fa fa-bars',
         [
             'Link 1'		=> ['#'],
             'Link 2'		=> ['#']
+        ]];
+        $sideMenu['Settings']       = ['fa fa-gears',
+        [
+            'Settings'		        => ['#'],
+            'Change Password'		=> ['change-password']
         ]];
         
         $activeLink = Request::segment(2);

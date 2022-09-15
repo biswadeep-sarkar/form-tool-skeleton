@@ -80,21 +80,24 @@ composer update biswadeep/form-tool
 ```
 
 ## What's modified from fresh a Laravel project?
-- Modified "boot" method in "app\Providers\AppServiceProvider.php"
+- Modified "boot" method in "app/Providers/AppServiceProvider.php"
 - Under "database" directory
   - Removed default migrations files
   - Added "create_demo_pages_table" migration *(For demo purpose, you can delete this)*
-  - Modified seeders\DatabaseSeeder.php
-  - Added UserSeeder.php under "database\seeders"
+  - Modified seeders/DatabaseSeeder.php
+  - Added UserSeeder.php under "database/seeders"
 - Added Controllers:
-  - Admin\AdminControllers.php
-  - Admin\DashboardController.php
-  - Admin\DemoController.php *(For demo purpose, you can delete this)*
+  - Admin/AdminControllers.php
+  - Admin/ChangePasswordController.php
+  - Admin/DashboardController.php
+  - Admin/DemoController.php *(For demo purpose, you can delete this)*
+  - Admin/UsersController.php
 - Added Models:
-  - Admin\DemoModel.php *(For demo purpose, you can delete this)*
+  - Admin/DemoModel.php *(For demo purpose, you can delete this)*
 - Added Views:
-  - admin\dashboard.blade.php
-- Modified "routes\web.php"
+  - admin/dashboard.blade.php
+- Added custom input type "StatusType" in "app/Http/InputTypes"
+- Modified "routes/web.php"
 - Added assets under "public/assets" directory
 - Modified README.md
 
