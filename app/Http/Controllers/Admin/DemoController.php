@@ -15,9 +15,11 @@ class DemoController extends AdminController
     // Optional only for this class
     private $singularTitle = 'Demo Page';
 
-    public function __construct()
+    private $crud = null;
+
+    public function setup()
     {
-        Doc::create($this, DemoModel::class, function($input)
+        $this->crud = Doc::create($this, DemoModel::class, function($input)
         {
             $input->text('title')->required();
             $input->text('slug')->slug();
@@ -33,6 +35,8 @@ class DemoController extends AdminController
 
     public function index()
     {
+        $this->setup();
+
         $data['title'] = $this->title;
 
         return $this->render('form-tool::crud.data_table', $data);
@@ -40,6 +44,8 @@ class DemoController extends AdminController
 
     public function create(Request $request)
     {
+        $this->setup();
+
         $data['title'] = 'Add ' . $this->singularTitle;
 
         return $this->render('form-tool::crud.data_form', $data);
@@ -47,16 +53,18 @@ class DemoController extends AdminController
 
     public function store(Request $request)
     {
-        
+        $this->setup();        
     }
 
     public function show($id)
     {
-        
+        $this->setup();
     }
 
     public function edit(Request $request, $id)
     {
+        $this->setup();
+
         $data['title'] = 'Edit ' . $this->singularTitle;
 
         return $this->render('form-tool::crud.data_form', $data);
@@ -64,11 +72,20 @@ class DemoController extends AdminController
 
     public function update(Request $request, $id)
     {
-
+        $this->setup();
     }
 
     public function destroy($id)
     {
-        
+        $this->setup();
+    }
+
+    public function search(Request $request)
+    {
+        $this->setup();
+
+        $result = $this->crud->search();
+
+        return $result;
     }
 }

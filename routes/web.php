@@ -4,12 +4,14 @@ use Illuminate\Support\Facades\Route;
 
 // Middlewares
 use Biswadeep\FormTool\Http\Middleware\AdminAuth;
+use Biswadeep\FormTool\Http\Middleware\GuardRequest;
 
 // Controllers
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DemoController;
 use App\Http\Controllers\Admin\ChangePasswordController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\UserGroupsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,16 +28,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/* FormTool Admin Routes */
-Route::group(['prefix' => config('form-tool.adminURL'), 'middleware' => [AdminAuth::class]], function () {
+// Admin Routes
+// The name of the route works with Guard class for user permissions
+Route::group(['prefix' => config('form-tool.adminURL'), 'middleware' => [AdminAuth::class, GuardRequest::class]], function ()
+{
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('dashboard', [DashboardController::class, 'index']);
-
+    Route::get('demo-pages/search', [DemoController::class, 'search'])->name('demo-pages.search');
     Route::resource('demo-pages', DemoController::class);
 
-    Route::get('/change-password', [ChangePasswordController::class, 'index']);
-    Route::put('change-password/{id}', [ChangePasswordController::class, 'update']);
-
-    Route::get('users/search', [UsersController::class, 'search']);
+    Route::get('users/search', [UsersController::class, 'search'])->name('users.search');
     Route::resource('users', UsersController::class);
+
+    Route::get('user-groups/search', [UserGroupsController::class, 'search'])->name('user-groups.search');
+    Route::resource('user-groups', UserGroupsController::class);
+
+    Route::get('change-password', [ChangePasswordController::class, 'index'])->name('change-password');
+    Route::put('change-password/{id}', [ChangePasswordController::class, 'update'])->name('change-password');
 });

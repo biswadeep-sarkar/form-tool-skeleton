@@ -92,10 +92,12 @@ composer update biswadeep/form-tool
   - Admin/DashboardController.php
   - Admin/DemoController.php *(For demo purpose, you can delete this)*
   - Admin/UsersController.php
+  - Admin/UserGroupsController.php
 - Added Models:
   - Admin/DemoModel.php *(For demo purpose, you can delete this)*
 - Added Views:
   - admin/dashboard.blade.php
+  - admin/user_groups_form.blade.php
 - Added custom input type "StatusType" in "app/Http/InputTypes"
 - Modified "routes/web.php"
 - Added assets under "public/assets" directory
