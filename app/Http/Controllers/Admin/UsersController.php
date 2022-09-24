@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 //use App\Models\Admin\UsersModel;
 
 use Biswadeep\FormTool\Core\Doc;
+use Biswadeep\FormTool\Core\BluePrint;
 use Biswadeep\FormTool\Core\DataModel;
 use Biswadeep\FormTool\Core\Auth;
 use App\Http\InputTypes\StatusType;
@@ -29,7 +30,7 @@ class UsersController extends AdminController
         $model = new DataModel();
         $model->db('users', 'userId');
 
-        $this->crud = Doc::create($this, $model, function($input)
+        $this->crud = Doc::create($this, $model, function(BluePrint $input)
         {
             $input->text('name')->required();
             $input->select('groupId', 'Group')->required()->options('user_groups.groupId.groupName');

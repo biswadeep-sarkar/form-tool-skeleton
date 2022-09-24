@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 use Biswadeep\FormTool\Core\Auth;
 use Biswadeep\FormTool\Core\Doc;
+use Biswadeep\FormTool\Core\BluePrint;
 use Biswadeep\FormTool\Core\DataModel;
 
 class UserGroupsController extends AdminController
@@ -33,7 +34,7 @@ class UserGroupsController extends AdminController
         $model->db('user_groups', 'groupId');
 
         // We are specifying a form name as instantiating controller class will replace our default form
-        $this->crud = Doc::create($this, $model, function($input)
+        $this->crud = Doc::create($this, $model, function(BluePrint $input)
         {
             $input->text('groupName', 'Group Name')->required();
         }, 'main');

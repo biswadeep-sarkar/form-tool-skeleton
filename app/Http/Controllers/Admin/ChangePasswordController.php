@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 use Biswadeep\FormTool\Core\Doc;
+use Biswadeep\FormTool\Core\BluePrint;
 use Biswadeep\FormTool\Core\DataModel;
 use Biswadeep\FormTool\Core\Auth;
 
@@ -21,7 +22,7 @@ class ChangePasswordController extends AdminController
         $model = new DataModel();
         $model->db('users', 'userID');
 
-        Doc::create($this, $model, function($input)
+        Doc::create($this, $model, function(BluePrint $input)
         {
             $user = Auth::user();
 
