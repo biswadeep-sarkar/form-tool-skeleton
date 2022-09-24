@@ -28,6 +28,8 @@ class AdminController extends Controller
             $child->add('change-password', 'Change Password');
         });
 
+        $data['sidebar'] = $menu->make();
+
         if (false === strpos($view, 'form-tool::'))
             $view = config('form-tool.adminURL') . '.' . $view;
 

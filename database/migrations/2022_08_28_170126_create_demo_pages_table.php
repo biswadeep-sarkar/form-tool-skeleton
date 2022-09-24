@@ -26,6 +26,8 @@ class CreateDemoPagesTable extends Migration
             $table->datetime('updatedAt')->nullable();
             $table->integer('createdBy')->nullable();
             $table->datetime('createdAt');
+            $table->integer('deletedBy')->nullable();
+            $table->datetime('deletedAt')->nullable();
         });
     }
 

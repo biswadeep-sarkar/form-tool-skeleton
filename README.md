@@ -79,7 +79,7 @@ Here we are cloning this repository into a temp folder. Then coping/moving all t
 composer update biswadeep/form-tool
 ```
 
-## What's modified from fresh a Laravel project?
+## What's modified from a fresh Laravel project?
 - Modified "boot" method in "app/Providers/AppServiceProvider.php"
 - Under "database" directory
   - Removed default migrations files
