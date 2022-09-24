@@ -74,7 +74,7 @@ class UserGroupsController extends AdminController
 
         $data['crudName'] = 'main';
 
-        return $this->render('form-tool::crud.data_table', $data);
+        return $this->render('form-tool::list.index', $data);
     }
 
     public function create(Request $request)
@@ -191,7 +191,7 @@ class UserGroupsController extends AdminController
             return back()->with('error', "You can't delete the main administrator group!");
         }
 
-        return $this->crud->destroy($id);
+        return $this->crud->delete($id);
     }
 
     public function search(Request $request)

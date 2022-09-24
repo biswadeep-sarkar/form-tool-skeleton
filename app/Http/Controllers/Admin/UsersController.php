@@ -61,14 +61,14 @@ class UsersController extends AdminController
     {
         $data['title'] = $this->title;
 
-        return $this->render('form-tool::crud.data_table', $data);
+        return $this->render('form-tool::list.index', $data);
     }
 
     public function create(Request $request)
     {
         $data['title'] = 'Add ' . $this->singularTitle;
 
-        return $this->render('form-tool::crud.data_form', $data);
+        return $this->render('form-tool::form.index', $data);
     }
 
     public function store(Request $request)
@@ -89,7 +89,7 @@ class UsersController extends AdminController
 
         $this->crud->edit($id);
 
-        return $this->render('form-tool::crud.data_form', $data);
+        return $this->render('form-tool::form.index', $data);
     }
 
     public function update(Request $request, $id)
@@ -148,7 +148,7 @@ class UsersController extends AdminController
             }
         }
 
-        return $this->crud->destroy($id);
+        return $this->crud->delete($id);
     }
 
     public function search(Request $request)

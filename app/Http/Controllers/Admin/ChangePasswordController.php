@@ -48,7 +48,7 @@ class ChangePasswordController extends AdminController
 
         Doc::getCrud()->edit($id);
 
-        return $this->render('form-tool::crud.data_form', $data);
+        return $this->render('form-tool::form.index', $data);
     }
 
     public function update(Request $request, $id)
