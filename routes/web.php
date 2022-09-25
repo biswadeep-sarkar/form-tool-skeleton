@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Biswadeep\FormTool\Support\CrudRoute;
 
 // Middlewares
 use Biswadeep\FormTool\Http\Middleware\AdminAuth;
@@ -34,14 +35,11 @@ Route::group(['prefix' => config('form-tool.adminURL'), 'middleware' => [AdminAu
 {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('demo-pages/search', [DemoController::class, 'search'])->name('demo-pages.search');
-    Route::resource('demo-pages', DemoController::class);
+    CrudRoute::resource('demo-pages', UsersController::class);
 
-    Route::get('users/search', [UsersController::class, 'search'])->name('users.search');
-    Route::resource('users', UsersController::class);
+    CrudRoute::resource('users', UsersController::class);
 
-    Route::get('user-groups/search', [UserGroupsController::class, 'search'])->name('user-groups.search');
-    Route::resource('user-groups', UserGroupsController::class);
+    CrudRoute::resource('user-groups', UserGroupsController::class);
 
     Route::get('change-password', [ChangePasswordController::class, 'index'])->name('change-password');
     Route::put('change-password/{id}', [ChangePasswordController::class, 'update'])->name('change-password');

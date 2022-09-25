@@ -31,7 +31,7 @@ class AdminController extends Controller
         $data['sidebar'] = $menu->make();
 
         if (false === strpos($view, 'form-tool::'))
-            $view = config('form-tool.adminURL') . '.' . $view;
+            $view = 'admin.' . $view;
 
         return view($view, $data);
     }

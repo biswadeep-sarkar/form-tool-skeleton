@@ -173,4 +173,4 @@ $('.all, .view, .create, .edit, .delete, .select').on('change', function(){
 
 {!! getFormJs(); !!}
 
-@stop
+@endsection

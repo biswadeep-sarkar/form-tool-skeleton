@@ -10,4 +10,4 @@
 	</div>
 </div>
 
-@stop
+@endsection
