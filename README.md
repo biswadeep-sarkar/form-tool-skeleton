@@ -86,6 +86,7 @@ composer update biswadeep/form-tool
   - Added "create_demo_pages_table" migration *(For demo purpose, you can delete this)*
   - Modified seeders/DatabaseSeeder.php
   - Added UserSeeder.php under "database/seeders"
+  - Added UserGroupsSeeder.php under "database/seeders"
 - Added Controllers:
   - Admin/AdminControllers.php
   - Admin/ChangePasswordController.php
@@ -98,7 +99,9 @@ composer update biswadeep/form-tool
 - Added Views:
   - admin/dashboard.blade.php
   - admin/user_groups_form.blade.php
-- Added custom input type "StatusType" in "app/Http/InputTypes"
+- Added custom input type in "app/Http/InputTypes"
+  - StatusType.php
+  - YesNoCheckbox.php
 - Modified "routes/web.php"
 - Added assets under "public/assets" directory
 - Modified README.md

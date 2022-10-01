@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Biswadeep\FormTool\Core\Doc;
 use Biswadeep\FormTool\Core\BluePrint;
+use App\Http\InputTypes\StatusType;
+use App\Http\InputTypes\YesNoCheckbox;
 use App\Models\Admin\DemoModel;
 
 class DemoController extends AdminController

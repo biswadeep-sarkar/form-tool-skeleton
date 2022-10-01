@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
+            'groupId' => 1,
             'password' => Hash::make('form12345'),
             'status' => 1,
             'createdAt' => Carbon::now()->toDateTimeString()

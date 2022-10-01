@@ -20,7 +20,7 @@ class ChangePasswordController extends AdminController
     public function setup()
     {
         $model = new DataModel();
-        $model->db('users', 'userID');
+        $model->db('users', 'userId');
 
         Doc::create($this, $model, function(BluePrint $input)
         {

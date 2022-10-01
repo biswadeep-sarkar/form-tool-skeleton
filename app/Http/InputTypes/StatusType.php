@@ -3,8 +3,8 @@
 namespace App\Http\InputTypes;
 
 use Biswadeep\FormTool\Core\InputTypes\SelectType;
-use Biswadeep\FormTool\Core\InputTypes\InputType;
-use Biswadeep\FormTool\Core\InputTypes\ICustomType;
+use Biswadeep\FormTool\Core\InputTypes\Common\InputType;
+use Biswadeep\FormTool\Core\InputTypes\Common\ICustomType;
 
 class StatusType extends SelectType implements ICustomType
 {
@@ -24,10 +24,12 @@ class StatusType extends SelectType implements ICustomType
 
         if (isset($this->options->{$this->value})) {
             $val = $this->options->{$this->value};
-            if ($this->value == 1)
+            if ($this->value == 1) {
                 return '<span class="badge btn-success">'. $val .'</span>';
-            else
+            }
+            else {
                 return '<span class="badge btn-danger">'. $val .'</span>';
+            }
         }
 
         return null;
