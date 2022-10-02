@@ -47,7 +47,7 @@ class UserGroupsController extends AdminController
 
         // Get all the controllers/modules under Admin path
         $this->modules = $this->getModules($removeControllers);
-
+		
         // You can modify this array to add your custom modules
         // $modules['other-route'] = ['title' => 'Other Module', 'route' => 'other-route'];
 
@@ -204,14 +204,16 @@ class UserGroupsController extends AdminController
 
     private function getModules($removeControllers = [])
     {
+		$separator = DIRECTORY_SEPARATOR;
+		
         $basePath = base_path();
-        $path = app_path().'\Http\Controllers\Admin';
-
+        $path = app_path().$separator.'Http'.$separator.'Controllers'.$separator.'Admin';
+		
         if (! \file_exists($path)) {
-            throw new \Exception('Administrator path not found: '.$path);
+            throw new \Exception('Admin path not found: '.$path);
         }
 
-        $path = array($path.'\*');
+        $path = array($path.$separator.'*');
 
         $modules = [];
 		while (\count($path)) {
@@ -219,18 +221,18 @@ class UserGroupsController extends AdminController
 			
 			foreach (\glob($explore) as $file) {
 				if (\is_dir($file)) {
-					$path[] = $file.'\*';
+					$path[] = $file.$separator.'*';
                 } else if (\is_file($file) && \strpos($file, '.php')) {
                     // Remove the basePath and .php from the path
-                    $controller = \str_replace([$basePath.'\\', '.php'], '', $file);
+                    $controller = \str_replace([$basePath.$separator, '.php'], '', $file);
 
                     if ($this->isInArray($controller, $removeControllers)) {
                         continue;
                     }
 
-                    // Make the app name capital as in the namespace of Laravel
-                    $controller = \ucfirst($controller);
-
+                    // Make the app name capital and in the namespace format of PHP
+                    $controller = \ucfirst(\str_replace($separator, '\\', $controller));
+					
                     // We are creating an object for every controller to get the title and route
                     $module = new $controller();
 					$modules[$module->route] = ['title' => $module->title, 'route' => $module->route];
@@ -245,8 +247,8 @@ class UserGroupsController extends AdminController
     {
         foreach ($haystack as $val) {
             // Remove everything before last \ (slash)
-            $needle = \substr($needle, \strrpos($needle, '\\'));
-            if (false !== \strpos($needle, '\\'.$val)) {
+            $needle = \substr($needle, \strrpos($needle, DIRECTORY_SEPARATOR));
+            if (false !== \strpos($needle, DIRECTORY_SEPARATOR.$val)) {
                 return true;
             }
         }
