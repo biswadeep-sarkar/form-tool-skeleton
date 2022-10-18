@@ -24,7 +24,7 @@ class AdminController extends Controller
         });
         
         $menu->addNested('Settings', 'fa fa-gears', function($child) {
-            $child->add('preferences', 'Preferences');
+            $child->add('settings', 'General');
             $child->add('change-password', 'Change Password');
         });
 

@@ -7,13 +7,6 @@ use Biswadeep\FormTool\Support\CrudRoute;
 use Biswadeep\FormTool\Http\Middleware\AdminAuth;
 use Biswadeep\FormTool\Http\Middleware\GuardRequest;
 
-// Controllers
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\DemoController;
-use App\Http\Controllers\Admin\ChangePasswordController;
-use App\Http\Controllers\Admin\UsersController;
-use App\Http\Controllers\Admin\UserGroupsController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,16 +24,13 @@ Route::get('/', function () {
 
 // Admin Routes
 // The name of the route works with Guard class for user permissions
-Route::group(['prefix' => config('form-tool.adminURL'), 'middleware' => [AdminAuth::class, GuardRequest::class]], function ()
-{
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::middleware([AdminAuth::class, GuardRequest::class])->prefix(config('form-tool.adminURL'))->name('')->group(function () {
+    
+    Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 
-    CrudRoute::resource('demo-pages', UsersController::class);
+    CrudRoute::resource('users', \App\Http\Controllers\Admin\UsersController::class);
+    CrudRoute::resource('user-groups', \App\Http\Controllers\Admin\UserGroupsController::class);
 
-    CrudRoute::resource('users', UsersController::class);
-
-    CrudRoute::resource('user-groups', UserGroupsController::class);
-
-    Route::get('change-password', [ChangePasswordController::class, 'index'])->name('change-password');
-    Route::put('change-password/{id}', [ChangePasswordController::class, 'update'])->name('change-password');
+    CrudRoute::indexAndUpdate('settings', \App\Http\Controllers\Admin\SettingsController::class);
+    CrudRoute::indexAndUpdate('change-password', \App\Http\Controllers\Admin\ChangePasswordController::class, '/{id}');
 });

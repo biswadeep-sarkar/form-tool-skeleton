@@ -43,7 +43,7 @@ class ChangePasswordController extends AdminController
     {
         $this->setup();
 
-        $data['title'] = 'Change Password';
+        $data['title'] = $this->title;
 
         $id = Auth::user()->userId;
 

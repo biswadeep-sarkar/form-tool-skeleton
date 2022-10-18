@@ -28,7 +28,7 @@ class UserGroupsController extends AdminController
     private $hide = [];
     private $disabled = [];
 
-    public function __construct()
+    public function setup()
     {
         $model = new DataModel();
         $model->db('user_groups', 'groupId');
@@ -42,6 +42,12 @@ class UserGroupsController extends AdminController
 
     private function setupModules($id = null)
     {
+        $deletedAt = 'deletedAt';
+        $metaColumns = \config('form-tool.table_meta_columns');
+        if (isset($metaColumns['deletedAt']) && \trim($metaColumns['deletedAt'])) {
+            $deletedAt = $metaColumns['deletedAt'];
+        }
+
         // List the controllers to remove from the modules list
         $removeControllers = ['Controller', 'AdminController'];
 
@@ -56,21 +62,23 @@ class UserGroupsController extends AdminController
 
         // We don't want Administrator and other users to remove Administrator's user-groups permissions
         // Let's assume that the first row in the user_groups table is the Administrator group
-        $adminGroup = DB::table('user_groups')->orderBy('groupId', 'asc')->first();
+        $adminGroup = DB::table('user_groups')->whereNull($deletedAt)->orderBy('groupId', 'asc')->first();
         if ($id && $adminGroup->groupId == $id) {
             $this->disabled = [
-                'user-groups' => ['all', 'view', 'create', 'edit', 'delete'],
+                'user-groups' => ['all', 'view', 'create', 'edit', 'delete', 'destroy'],
             ];
         }
 
         // If we want to hide some unnecessary action, we can specify it here
         $this->hide = [
-            'change-password' => ['create', 'delete'],
+            'change-password' => ['create', 'delete', 'destroy'],
         ];
     }
 
     public function index()
     {
+        $this->setup();
+        
         $data['title'] = $this->title;
 
         $data['crudName'] = 'main';
@@ -78,8 +86,28 @@ class UserGroupsController extends AdminController
         return $this->render('form-tool::list.index', $data);
     }
 
+    public function bulkAction(Request $request)
+    {
+        $this->setup();
+        
+        return $this->crud->bulkAction(function($id, $action) {
+            if ($action == 'delete') {
+                $response = $this->checkBeforeDelete($id);
+                if ($response === true) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            return true;
+        });
+    }
+
     public function create(Request $request)
     {
+        $this->setup();
+        
         $data['title'] = 'Add ' . $this->singularTitle;
 
         // Setup the modules
@@ -90,13 +118,15 @@ class UserGroupsController extends AdminController
         $data['disabled'] = $this->disabled;
         $data['hide'] = $this->hide;
 
-        $data['form'] = $this->crud->getForm();
+        $data['form'] = $this->crud->createForm();
 
         return $this->render('user_groups_form', $data);
     }
 
     public function store(Request $request)
     {
+        $this->setup();
+        
         // Add a field to our crud to save permission
         $this->crud->modify(function($input) {
             $input->text('permission');
@@ -115,11 +145,13 @@ class UserGroupsController extends AdminController
 
     public function show($id)
     {
-        
+        $this->setup();
     }
 
     public function edit(Request $request, $id)
     {
+        $this->setup();
+        
         $data['title'] = 'Edit ' . $this->singularTitle;
 
         // Setup the modules
@@ -138,20 +170,22 @@ class UserGroupsController extends AdminController
         $data['disabled'] = $this->disabled;
         $data['hide'] = $this->hide;
 
-        $data['form'] = $this->crud->getForm();
+        $data['form'] = $this->crud->createForm();
 
         return $this->render('user_groups_form', $data);
     }
 
     public function update(Request $request, $id)
     {
+        $this->setup();
+        
         // Setup the modules also important on update to prevent below hacks
         $this->setupModules($id);
 
         $permission = $request->post('permission');
 
         // Let's prevent if someone tries to hack and remove hidden elements of disabled checkboxes
-        $desiredActions = ['view', 'create', 'edit', 'delete'];
+        $desiredActions = ['view', 'create', 'edit', 'delete', 'destroy'];
         foreach ($this->disabled as $module => $actions) {
             $values = [];
             foreach ($actions as $action) {
@@ -181,9 +215,36 @@ class UserGroupsController extends AdminController
 
     public function destroy($id)
     {
+        $this->setup();
+        
+        $response = $this->checkBeforeDelete($id);
+        if ($response !== true) {
+            return $response;
+        }
+
+        return $this->crud->delete($id);
+    }
+
+    public function search(Request $request)
+    {
+        $this->setup();
+        
+        $result = $this->crud->search();
+
+        return $result;
+    }
+
+    private function checkBeforeDelete($id)
+    {
+        $deletedAt = 'deletedAt';
+        $metaColumns = \config('form-tool.table_meta_columns');
+        if (isset($metaColumns['deletedAt']) && \trim($metaColumns['deletedAt'])) {
+            $deletedAt = $metaColumns['deletedAt'];
+        }
+
         // We don't want Administrator and other users to remove Administrator's group
         // Let's assume that the first row in the user_groups table is the Administrator group
-        $adminGroup = DB::table('user_groups')->orderBy('groupId', 'asc')->first();        
+        $adminGroup = DB::table('user_groups')->whereNull($deletedAt)->orderBy('groupId', 'asc')->first();        
         if (! $adminGroup) {
             return back()->with('error', 'Administrator user group not found!');
         }
@@ -192,14 +253,7 @@ class UserGroupsController extends AdminController
             return back()->with('error', "You can't delete the main administrator group!");
         }
 
-        return $this->crud->delete($id);
-    }
-
-    public function search(Request $request)
-    {
-        $result = $this->crud->search();
-
-        return $result;
+        return true;
     }
 
     private function getModules($removeControllers = [])
@@ -235,6 +289,14 @@ class UserGroupsController extends AdminController
 					
                     // We are creating an object for every controller to get the title and route
                     $module = new $controller();
+
+                    if (! isset($module->title)) {
+                        throw new \Exception('$title not set or not declared as public at ['. \get_class($module) .']');
+                    }
+                    if (! isset($module->route)) {
+                        throw new \Exception('$route not set or not declared as public at ['. \get_class($module) .']!');
+                    }
+
 					$modules[$module->route] = ['title' => $module->title, 'route' => $module->route];
                 }
 			}
