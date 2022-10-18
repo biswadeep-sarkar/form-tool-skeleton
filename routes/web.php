@@ -28,6 +28,8 @@ Route::middleware([AdminAuth::class, GuardRequest::class])->prefix(config('form-
     
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 
+    CrudRoute::resource('demo-pages', UsersController::class);
+
     CrudRoute::resource('users', \App\Http\Controllers\Admin\UsersController::class);
     CrudRoute::resource('user-groups', \App\Http\Controllers\Admin\UserGroupsController::class);
 
