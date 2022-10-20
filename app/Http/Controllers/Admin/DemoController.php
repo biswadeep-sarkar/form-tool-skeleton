@@ -45,6 +45,13 @@ class DemoController extends AdminController
         return $this->render('form-tool::list.index', $data);
     }
 
+    public function bulkAction(Request $request)
+    {
+        $this->setup();
+        
+        return $this->crud->bulkAction();
+    }
+
     public function create(Request $request)
     {
         $this->setup();
