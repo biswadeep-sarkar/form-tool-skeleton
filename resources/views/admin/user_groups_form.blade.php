@@ -30,11 +30,15 @@
                         <thead>
                             <tr>
                                 <th>Modules</th>
-                                <th><label><input type="checkbox" id="select-all" class="select" data-selector=".all, .view, .create, .edit, .delete, .select" />&nbsp; All</label></th>
+                                <th><label><input type="checkbox" id="select-all" class="select" data-selector=".all, .view, .create, .edit, .delete, .destroy, .select" />&nbsp; All</label></th>
                                 <th><label><input type="checkbox" id="select-view" class="select" data-selector=".view" />&nbsp; View</label></th>
                                 <th><label><input type="checkbox" id="select-create" class="select" data-selector=".create" />&nbsp; Create</label></th>
                                 <th><label><input type="checkbox" id="select-edit" class="select" data-selector=".edit" />&nbsp; Edit</label></th>
                                 <th><label><input type="checkbox" id="select-delete" class="select" data-selector=".delete" />&nbsp; Delete</label></th>
+
+                                @if (config('form-tool.isSoftDelete'))
+                                    <th><label><input type="checkbox" id="select-destroy" class="select" data-selector=".destroy" />&nbsp; Delete <br /> Permanently</label></th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -92,6 +96,19 @@
                                             @endif
                                         @endif
                                     </td>
+
+                                    <td>
+                                        @if (config('form-tool.isSoftDelete'))
+                                            @if (! isset($hide[$module['route']]) || ! in_array('destroy', $hide[$module['route']]))
+                                                @if (isset($disabled[$module['route']]) && in_array('destroy', $disabled[$module['route']]))
+                                                    <input type="checkbox" checked disabled />
+                                                    <input type="hidden" name="permission[{{ $module['route'] }}][destroy]" value="1" >
+                                                @else
+                                                <input type="checkbox" class="destroy" name="permission[{{ $module['route'] }}][destroy]" value="1" @if (isset($permission->{$module['route']}->destroy)) checked @endif />
+                                                @endif
+                                            @endif
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -109,7 +126,7 @@
 </div>
 
 <script>
-let styleClasses = ['view', 'create', 'edit', 'delete'];
+let styleClasses = ['view', 'create', 'edit', 'delete', 'destroy'];
 
 // Check checkboxes and select all checkbox if all are checked=true
 function selectAll()
@@ -166,7 +183,7 @@ $('.select').on('click', function() {
     $(selector).prop('checked', $(this).prop('checked'));
 });
 
-$('.all, .view, .create, .edit, .delete, .select').on('change', function(){
+$('.all, .view, .create, .edit, .delete, .destroy, .select').on('change', function(){
     selectAll();
 });
 </script>
