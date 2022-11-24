@@ -36,7 +36,7 @@ class ChangePasswordController extends AdminController
             $input->password('password', 'New Password')->required()->validations('min:8');
             $input->password('confirm', 'Confirm Password')->required()->validations('same:password');
         
-        })->saveOnly('password');
+        })->saveOnly('password')->actionLog(false);
     }
 
     public function index()

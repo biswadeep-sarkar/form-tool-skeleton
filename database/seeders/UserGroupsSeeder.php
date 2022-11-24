@@ -18,7 +18,7 @@ class UserGroupsSeeder extends Seeder
     {
         DB::table('user_groups')->insert([
             'groupName' => 'Administrator',
-            'permission' => '{"change-password":{"view":"1","edit":"1"},"dashboard":{"view":"1","create":"1","edit":"1","delete":"1"},"demo-pages":{"view":"1","create":"1","edit":"1","delete":"1"},"user-groups":{"view":1,"create":1,"edit":1,"delete":1},"users":{"view":"1","create":"1","edit":"1","delete":"1"}}',
+            'permission' => '{"change-password":{"view":"1","edit":"1"},"dashboard":{"view":"1","create":"1","edit":"1","delete":"1"},"demo-pages":{"view":"1","create":"1","edit":"1","delete":"1"},"user-groups":{"view":1,"create":1,"edit":1,"delete":1},"users":{"view":"1","create":"1","edit":"1","delete":"1"},"activities-log":{"view":"1"}}',
             'createdAt' => Carbon::now()->toDateTimeString()
         ]);
     }

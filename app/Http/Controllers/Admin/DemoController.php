@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Biswadeep\FormTool\Core\Doc;
 use Biswadeep\FormTool\Core\BluePrint;
+use Biswadeep\FormTool\Core\DataModel;
 use App\Http\InputTypes\StatusType;
 use App\Http\InputTypes\YesNoCheckbox;
 use App\Models\Admin\DemoModel;
@@ -22,6 +23,9 @@ class DemoController extends AdminController
 
     public function setup()
     {
+        $model = new DataModel();
+        $model->db('test', 'testID')->token('testToken');
+        
         $this->crud = Doc::create($this, DemoModel::class, function(BluePrint $input)
         {
             $input->text('title')->required();

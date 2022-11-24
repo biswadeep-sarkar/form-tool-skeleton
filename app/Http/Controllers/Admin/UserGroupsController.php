@@ -37,7 +37,7 @@ class UserGroupsController extends AdminController
         $this->crud = Doc::create($this, $model, function(BluePrint $input)
         {
             $input->text('groupName', 'Group Name')->required();
-        }, 'main');
+        }, 'main')->actionLog(false);
     }
 
     private function setupModules($id = null)
@@ -72,6 +72,7 @@ class UserGroupsController extends AdminController
         // If we want to hide some unnecessary action, we can specify it here
         $this->hide = [
             'change-password' => ['create', 'delete', 'destroy'],
+            'activities-log' => ['create', 'edit', 'delete', 'destroy'],
         ];
     }
 

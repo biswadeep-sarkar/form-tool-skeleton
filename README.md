@@ -88,6 +88,7 @@ composer update biswadeep/form-tool
   - Added UserSeeder.php under "database/seeders"
   - Added UserGroupsSeeder.php under "database/seeders"
 - Added Controllers:
+  - Admin/ActionsLogController.php
   - Admin/AdminControllers.php
   - Admin/ChangePasswordController.php
   - Admin/DashboardController.php
@@ -97,6 +98,8 @@ composer update biswadeep/form-tool
 - Added Models:
   - Admin/DemoModel.php *(For demo purpose, you can delete this)*
 - Added Views:
+  - admin/actions_log/index.blade.php
+  - admin/actions_log/show.blade.php
   - admin/dashboard.blade.php
   - admin/user_groups_form.blade.php
 - Added custom input type in "app/Http/InputTypes"

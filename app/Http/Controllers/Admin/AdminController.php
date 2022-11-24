@@ -23,6 +23,7 @@ class AdminController extends Controller
             $child->add('user-groups', 'User Groups');
         });
         
+        $menu->add('activities-log', 'Activities Log', 'fa fa-bars');
         $menu->addNested('Settings', 'fa fa-gears', function($child) {
             $child->add('settings', 'General');
             $child->add('change-password', 'Change Password');
