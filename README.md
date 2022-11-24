@@ -1,6 +1,6 @@
 # FormTool Skeleton
 
-This skeleton will provide you a boost start with our [FormTool](https://github.com/biswadeep-sarkar/form-tool) package, which is also a dependency for this package. This skeleton is based on Laravel 8.83.23 and AdminLTE 2.x.
+This skeleton will provide you a boost start with our [FormTool](https://github.com/biswadeep-sarkar/form-tool) package, which is also a dependency for this package. This skeleton is based on Laravel 8.83.23, AdminLTE 2.x and pre-installed FormTool package.
 
 *This package still under primary development.*
 
@@ -26,25 +26,19 @@ php artisan key:generate
 Create database and **setup the database connection** in the .env file
 
 ### Step 4:
-Run this command to install form-tool
-```
-composer require biswadeep/form-tool
-```
-
-### Step 5:
 Copy the vendor config file only
 ```
 php artisan vendor:publish --provider="Biswadeep\FormTool\FormToolServiceProvider" --tag=config
 ```
 
-### Step 6:
+### Step 5:
 Modify login email and password in "database\seeders\UserSeeder.php"<br>
 Default credential:
 > Email: `admin@gmail.com`
 >
 > Password: `form12345`
 
-### Step 7:
+### Step 6:
 Run the migration with seeder:
 ```
 php artisan migrate --seed
