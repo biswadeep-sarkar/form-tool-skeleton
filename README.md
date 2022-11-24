@@ -23,13 +23,13 @@ php artisan key:generate
 ```
 
 ### Step 3:
-Create database and **setup the database connection** in the .env file
-
-### Step 4:
 Copy the vendor config file only
 ```
 php artisan vendor:publish --provider="Biswadeep\FormTool\FormToolServiceProvider" --tag=config
 ```
+
+### Step 4:
+Create database and **setup the database connection** in the .env file
 
 ### Step 5:
 Modify login email and password in "database\seeders\UserSeeder.php"<br>
