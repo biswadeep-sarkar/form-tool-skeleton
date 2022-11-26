@@ -46,6 +46,8 @@ class DemoController extends AdminController
 
         $data['title'] = $this->title;
 
+        $data['page'] = $this->crud->index();
+
         return $this->render('form-tool::list.index', $data);
     }
 
@@ -61,6 +63,8 @@ class DemoController extends AdminController
         $this->setup();
 
         $data['title'] = 'Add ' . $this->singularTitle;
+
+        $data['page'] = $this->crud->create();
 
         return $this->render('form-tool::form.index', $data);
     }
@@ -80,6 +84,8 @@ class DemoController extends AdminController
         $this->setup();
 
         $data['title'] = 'Edit ' . $this->singularTitle;
+
+        $data['page'] = $this->crud->edit($id);
 
         return $this->render('form-tool::form.index', $data);
     }

@@ -59,8 +59,8 @@
                                     @break;
 
                                 @case('encrypted')
-                                    <span class="@if($data2) text-removed @endif">{{ decryptText($data1) }}</span>
-                                    <span class="text-added">{{ decryptText($data2) }}</span>
+                                    <span class="@if($data2) text-removed @endif">{!! decryptText($data1) !!}</span>
+                                    <span class="text-added">{!! decryptText($data2) !!}</span>
                                     @break;
 
                                 @case('editor')
@@ -84,8 +84,8 @@
                                     @break;
 
                                 @default
-                                    <span class="@if($data2) text-removed @endif">{{ $data1 }}</span>
-                                    <span class="text-added">{{ $data2 }}</span>
+                                    <span class="@if($data2) text-removed @endif">{!! $data1 !!}</span>
+                                    <span class="text-added">{!! $data2 !!}</span>
                                     @break;
 
                             @endswitch

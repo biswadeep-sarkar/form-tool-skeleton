@@ -2,7 +2,7 @@
 
 @section('content')
 
-{!! getFormCss(); !!}
+{!! $page->style !!}
 
 <div class="row">
     <div class="col-md-8 col-sm-offset-2">
@@ -11,17 +11,21 @@
                 <h3 class="box-title">{{ $title ?? '' }}</h3>
             </div>
 
-            <form action="{{ $form->action }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ $page->form->action }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
                 <div class="box-body">
                     @csrf
 
-                    @if ($form->isEdit)
+                    @if ($page->form->isEdit)
                         <input type="hidden" name="_method" value="PUT">
+                    @else
+                        <!-- this is only needed when you use run() -->
+                        <!-- name="method" is different from the above edit -->
+                        <input type="hidden" name="method" value="CREATE">
                     @endif
 
                     <div id="beforeForm"></div>
 
-                    @foreach ($form->fields as $field)
+                    @foreach ($page->form->fields as $field)
                         {!! $field !!}
                     @endforeach
 
@@ -116,11 +120,15 @@
 
                     <div id="afterForm"></div>
                 </div>
-                <div class="box-footer">
-                    <button class="btn btn-primary btn-flat submit">Submit</button>
+                <div class="box-footer footer-sticky">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <button class="btn btn-success btn-flat submit">Submit</button>
+                            &nbsp; <a href="{{ $page->form->cancel }}" class="btn btn-default btn-flat">Cancel</a>
+                        </div>
+                    </div>
                 </div>
             </form>
-
         </div>
     </div>
 </div>
@@ -188,6 +196,6 @@ $('.all, .view, .create, .edit, .delete, .destroy, .select').on('change', functi
 });
 </script>
 
-{!! getFormJs(); !!}
+{!! $page->script !!}
 
 @endsection

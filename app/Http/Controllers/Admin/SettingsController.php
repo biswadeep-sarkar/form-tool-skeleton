@@ -99,7 +99,7 @@ class SettingsController extends AdminController
 
         $data['title'] = $this->title;
 
-        $this->crud->edit();
+        $data['page'] = $this->crud->edit();
 
         return $this->render('form-tool::form.index', $data);
     }

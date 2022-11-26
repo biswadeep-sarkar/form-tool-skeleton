@@ -82,7 +82,7 @@ class UserGroupsController extends AdminController
         
         $data['title'] = $this->title;
 
-        $data['crudName'] = 'main';
+        $data['page'] = $this->crud->index();
 
         return $this->render('form-tool::list.index', $data);
     }
@@ -119,7 +119,7 @@ class UserGroupsController extends AdminController
         $data['disabled'] = $this->disabled;
         $data['hide'] = $this->hide;
 
-        $data['form'] = $this->crud->createForm();
+        $data['page'] = $this->crud->create();
 
         return $this->render('user_groups_form', $data);
     }
@@ -158,8 +158,7 @@ class UserGroupsController extends AdminController
         // Setup the modules
         $this->setupModules($id);
 
-        // Call edit
-        $this->crud->edit($id);
+        $data['page'] = $this->crud->edit($id);
 
         // Get edit data
         $result = $this->crud->getEditData();
@@ -170,8 +169,6 @@ class UserGroupsController extends AdminController
         $data['modules'] = $this->modules;
         $data['disabled'] = $this->disabled;
         $data['hide'] = $this->hide;
-
-        $data['form'] = $this->crud->createForm();
 
         return $this->render('user_groups_form', $data);
     }
