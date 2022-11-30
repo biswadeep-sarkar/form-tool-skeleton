@@ -22,6 +22,7 @@
 @endif
 
 @if ($action->data)
+    <p style="margin-bottom:15px"><b>View History:</b> <a href="{{ url(config('form-tool.adminURL').'/activities-log') }}?id={{ $action->refId }}">#{{ $action->refId }}</a></p>
     @if (isset($action->data['copyFrom']))
         @php 
         $dId = $action->data['copyFrom']['refId'];
@@ -36,12 +37,12 @@
             <tr>
                 <th>{{ $label }}</th>
                 <td>
-                    @if (is_string($value))
+                    @if (! is_array($value))
                         {{ $value }}
                     @else
                         @php 
                         $data1 = $data2 = null;
-                        if (is_string($value['data'])) {
+                        if (! is_array($value['data'])) {
                             $data1 = $value['data'];
                         }
                         else {
@@ -64,8 +65,8 @@
                                     @break;
 
                                 @case('editor')
-                                    <span class="@if($data2) text-removed @endif">{!! decodeHTML($data1) !!}</span>
-                                    <span class="text-added">{!! decodeHTML($data2) !!}</span>
+                                    <div class="@if($data2) text-removed @endif">{!! decodeHTML($data1) !!}</div>
+                                    <div class="text-added">{!! decodeHTML($data2) !!}</div>
                                     @break;
 
                                 @case('datetime')

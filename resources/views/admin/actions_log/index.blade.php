@@ -18,7 +18,7 @@
                     <tr>
                         <th>Action</th>
                         <th>Module</th>
-                        <th>Id</th>
+                        <th>Description</th>
                         <th>Data</th>
                         <th>Go To</th>
                         <th>Acted At</th>
@@ -74,10 +74,11 @@
                                 </a>
                             </td>
                             <td><a href="{{ $urls['module'] }}&module={{ $row->module }}">{{ $row->module }}</a></td>
-                            <td><a href="{{ $urls['id'] }}&id={{ $refId }}">#{{ $refId }} </a></td>
+                            <td>{!! $row->description !!}</td>
+                            <?php /*<td><a href="{{ $urls['id'] }}&id={{ $refId }}">#{{ $refId }} </a></td>*/ ?>
                             <td>
                                 @if ($row->data)
-                                    <a href="javascript:;" onClick="show('{{ $row->id }}', '#{{ $refId }}')">View</a>
+                                    <a href="javascript:;" onClick="show('{{ $row->id }}', '#{{ $refId }}', '{{ $row->module }}')">View</a>
                                 @endif
                             </td>
                             <td>
@@ -119,10 +120,10 @@
 </div>
 
 <script>
-function show(id, refId)
+function show(id, refId, moduleName)
 {
     $('#showModalBody').html('<p class="text-center" style="margin:15px;"><i class="fa fa-spinner fa-pulse"></i> Loading...</p>');
-    $('#showModalLabel').html(refId);
+    $('#showModalLabel').html(moduleName + ": " + refId);
     $.get('{{ route('activities-log') }}/show/'+id, {}, function(data){
         $('#showModal').modal('show');
         $('#showModalBody').html(data);

@@ -19,9 +19,7 @@ class UsersController extends AdminController
     // Required for Form Tool
     public $title = 'Users';
     public $route = 'users';
-
-    // Optional only for this class
-    private $singularTitle = 'User';
+    public $singularTitle = 'User';
 
     private $crud = null;
 
@@ -181,6 +179,10 @@ class UsersController extends AdminController
 
     private function checkBeforeDelete($id)
     {
+        if (Auth::user()->userId == $id) {
+            return back()->with('error', 'Oops!! You cannot delete yourself!');
+        }
+
         $deletedAt = 'deletedAt';
         $metaColumns = \config('form-tool.table_meta_columns');
         if (isset($metaColumns['deletedAt']) && \trim($metaColumns['deletedAt'])) {

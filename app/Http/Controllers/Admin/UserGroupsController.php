@@ -18,9 +18,7 @@ class UserGroupsController extends AdminController
     // Required for Form Tool
     public $title = 'Users Groups';
     public $route = 'user-groups';
-
-    // Optional only for this class
-    private $singularTitle = 'User Group';
+    public $singularTitle = 'User Group';
 
     private $crud = null;
 

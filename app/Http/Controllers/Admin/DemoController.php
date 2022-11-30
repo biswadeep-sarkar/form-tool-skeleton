@@ -15,9 +15,7 @@ class DemoController extends AdminController
     // Required for Form Tool
     public $title = 'Demo Pages';
     public $route = 'demo-pages';
-
-    // Optional only for this class
-    private $singularTitle = 'Demo Page';
+    public $singularTitle = 'Demo Page';
 
     private $crud = null;
 
@@ -71,12 +69,15 @@ class DemoController extends AdminController
 
     public function store(Request $request)
     {
-        $this->setup();        
+        $this->setup();
+        
+        // Needed if you are not using run()
+        // return $this->crud->store();
     }
 
     public function show($id)
     {
-        $this->setup();
+        $this->setup($id);
     }
 
     public function edit(Request $request, $id)
@@ -93,11 +94,17 @@ class DemoController extends AdminController
     public function update(Request $request, $id)
     {
         $this->setup();
+        
+        // Needed if you are not using run()
+        // return $this->crud->udpate($id);
     }
 
     public function destroy($id)
     {
         $this->setup();
+        
+        // Needed if you are not using run()
+        // return $this->crud->delete($id);
     }
 
     public function search(Request $request)

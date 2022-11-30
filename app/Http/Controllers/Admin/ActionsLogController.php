@@ -11,14 +11,13 @@ use App\Models\Admin\StoresModel;
 
 use Biswadeep\FormTool\Core\Doc;
 use Biswadeep\FormTool\Core\BluePrint;
+use Biswadeep\FormTool\Core\Guard;
 
 class ActionsLogController extends AdminController
 {
     // Required for Form Tool
     public $title = 'Activities Log';
     public $route = 'activities-log';
-
-    private $crud = null;
 
     public function index(Request $request)
     {
@@ -37,7 +36,7 @@ class ActionsLogController extends AdminController
             }
 
             $value = $request->query($key);
-            $queryString = \http_build_query($request->except($key));
+            $queryString = \http_build_query($request->except([$key, 'page']));
             if ($value) {
                 $filteredBy[\ucfirst($key)] = [
                     'value' => $request->query($key),
@@ -79,6 +78,9 @@ class ActionsLogController extends AdminController
 
         if ($data['action']) {
             $data['action']->data = \json_decode($data['action']->data, true);
+
+            $data['action']->hasEditPermission = Guard::hasEdit($data['action']->route);
+            $data['action']->hasDestroyPermission = Guard::hasDestroy($data['action']->route);
         }
 
         return \view('admin.actions_log.show', $data);

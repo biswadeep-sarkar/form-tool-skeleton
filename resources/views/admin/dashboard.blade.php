@@ -5,7 +5,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="well">
-			<h1><i class="fa fa-smile-o fa-3x"></i> Welcome to Admin!</h1>
+			<h1><i class="fa fa-smile-o fa-3x"></i> Welcome to {{ config('app.name') }}!</h1>
 		</div>
 	</div>
 </div>
