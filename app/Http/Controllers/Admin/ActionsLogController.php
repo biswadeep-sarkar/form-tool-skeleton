@@ -24,7 +24,7 @@ class ActionsLogController extends AdminController
         $data['title'] = $this->title;
 
         $query = DB::table('action_logs as a')->selectRaw('a.*, u.name')
-        ->leftJoin('users as u', 'u.userId', '=', 'a.actionBy');
+        ->leftJoin('users as u', 'u.userId', '=', 'a.createdBy');
 
         $filterKeys = ['action', 'module', 'id'];
         $filteredBy = [];
@@ -73,7 +73,7 @@ class ActionsLogController extends AdminController
     public function show($id)
     {
         $data['action'] = DB::table('action_logs as a')->selectRaw('a.*, u.name')
-        ->leftJoin('users as u', 'u.userId', '=', 'a.actionBy')
+        ->leftJoin('users as u', 'u.userId', '=', 'a.createdBy')
         ->where('id', $id)->first();
 
         if ($data['action']) {

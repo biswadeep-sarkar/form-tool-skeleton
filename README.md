@@ -74,7 +74,8 @@ composer update biswadeep/form-tool
 ```
 
 ## What's modified from a fresh Laravel project?
-- Modified "boot" method in "app/Providers/AppServiceProvider.php"
+- Modified "app/Providers/AppServiceProvider.php"
+- Modified "app/Http/Controllers/Controller.php"
 - Under "database" directory
   - Removed default migrations files
   - Added "create_demo_pages_table" migration *(For demo purpose, you can delete this)*
@@ -87,8 +88,9 @@ composer update biswadeep/form-tool
   - Admin/ChangePasswordController.php
   - Admin/DashboardController.php
   - Admin/DemoController.php *(For demo purpose, you can delete this)*
-  - Admin/UsersController.php
+  - Admin/SettingsController.php
   - Admin/UserGroupsController.php
+  - Admin/UsersController.php
 - Added Models:
   - Admin/DemoModel.php *(For demo purpose, you can delete this)*
 - Added Views:

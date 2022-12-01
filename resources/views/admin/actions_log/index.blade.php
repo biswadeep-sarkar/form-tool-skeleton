@@ -78,7 +78,7 @@
                             <?php /*<td><a href="{{ $urls['id'] }}&id={{ $refId }}">#{{ $refId }} </a></td>*/ ?>
                             <td>
                                 @if ($row->data)
-                                    <a href="javascript:;" onClick="show('{{ $row->id }}', '#{{ $refId }}', '{{ $row->module }}')">View</a>
+                                    <a href="javascript:;" onClick="show('{{ $row->id }}', '{{ $refId }}', '{{ $row->module }}')">View</a>
                                 @endif
                             </td>
                             <td>
@@ -86,8 +86,8 @@
                                     <a href="{{ url(config('form-tool.adminURL').'/'.$row->route) }}?id={{ $refId.$trashFilter }}" target="_blank"><i class="fa fa-external-link"></i></a>
                                 @endif
                             </td>
-                            <td>{{ niceDateTime($row->actionAt) }}</td>
-                            <td>@if ($row->name) {{ $row->name }} @else {{ $row->actionByName }} @endif</td>
+                            <td>{{ niceDateTime($row->createdAt) }}</td>
+                            <td>@if ($row->name) {{ $row->name }} @else {{ $row->createdByName }} @endif</td>
                         </tr>
                     @endforeach
 
@@ -122,8 +122,13 @@
 <script>
 function show(id, refId, moduleName)
 {
+    if (parseInt(refId) > 0) {
+        $('#showModalLabel').html(moduleName + ": #" + refId);
+    } else {
+        $('#showModalLabel').html(moduleName);
+    }
+
     $('#showModalBody').html('<p class="text-center" style="margin:15px;"><i class="fa fa-spinner fa-pulse"></i> Loading...</p>');
-    $('#showModalLabel').html(moduleName + ": " + refId);
     $.get('{{ route('activities-log') }}/show/'+id, {}, function(data){
         $('#showModal').modal('show');
         $('#showModalBody').html(data);

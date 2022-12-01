@@ -51,7 +51,7 @@ class UsersController extends AdminController
         else {
             $this->crud->modify(function($input)
             {
-                $input->modify('password')->required(false)->help("You can ignore password if you don't want to change");
+                $input->modify('password')->required(false)->help("Leave the password blank, if you don't want to change");
             });
         }
     }

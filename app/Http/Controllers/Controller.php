@@ -10,4 +10,11 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    protected $settings = null;
+
+    public function __construct()
+    {
+        $this->settings = \app('settings');
+    }
 }
