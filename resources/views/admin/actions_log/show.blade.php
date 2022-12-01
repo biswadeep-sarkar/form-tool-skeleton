@@ -22,7 +22,7 @@
 @endif
 
 @if ($action->data)
-    <p style="margin-bottom:15px"><b>View History:</b> <a href="{{ url(config('form-tool.adminURL').'/activities-log') }}?id={{ $action->refId }}">#{{ $action->refId }}</a></p>
+    <p style="margin-bottom:15px"><b>View History:</b> <a href="{{ url(config('form-tool.adminURL').'/activities-log') }}?id={{ $action->refId }}&module={{ $action->module }}">#{{ $action->refId }}</a></p>
     @if (isset($action->data['copyFrom']))
         @php 
         $dId = $action->data['copyFrom']['refId'];
