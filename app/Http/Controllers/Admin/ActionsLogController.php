@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
-
 use App\Models\Admin\CategoriesModel;
 use App\Models\Admin\StoresModel;
-
 use Biswadeep\FormTool\Core\Doc;
 use Biswadeep\FormTool\Core\BluePrint;
 use Biswadeep\FormTool\Core\Guard;
@@ -32,7 +30,7 @@ class ActionsLogController extends AdminController
 
         foreach ($filterKeys as $key) {
             if (! \in_array($key, $filterKeys)) {
-                continue; 
+                continue;
             }
 
             $value = $request->query($key);
@@ -46,17 +44,17 @@ class ActionsLogController extends AdminController
 
             $urls[$key] = \url()->current().'?'.$queryString;
         }
-        
+
         if ($request->query('action')) {
             $query->where('action', $request->query('action'));
         }
-        
+
         if ($request->query('module')) {
             $query->where('module', $request->query('module'));
         }
-        
+
         if ($request->query('id')) {
-            $query->where(function($query) use ($request) {
+            $query->where(function ($query) use ($request) {
                 $query->where('refId', '=', $request->query('id'))
                       ->orWhere('token', '=', $request->query('id'));
             });
@@ -70,7 +68,7 @@ class ActionsLogController extends AdminController
         return $this->render('actions_log.index', $data);
     }
 
-    public function show($id)
+    public function show(Request $request, $id = null)
     {
         $data['action'] = DB::table('action_logs as a')->selectRaw('a.*, u.name')
         ->leftJoin('users as u', 'u.userId', '=', 'a.createdBy')

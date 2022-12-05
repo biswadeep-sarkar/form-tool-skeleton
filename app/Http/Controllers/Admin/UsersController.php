@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
-
 //use App\Models\Admin\UsersModel;
 
 use Biswadeep\FormTool\Core\Doc;
@@ -21,15 +20,14 @@ class UsersController extends AdminController
     public $route = 'users';
     public $singularTitle = 'User';
 
-    private $crud = null;
+    protected $crud = null;
 
-    public function setup()
+    protected function setup()
     {
         $model = new DataModel();
         $model->db('users', 'userId');
 
-        $this->crud = Doc::create($this, $model, function(BluePrint $input)
-        {
+        $this->crud = Doc::create($this, $model, function (BluePrint $input) {
             $input->text('name')->required();
             $input->select('groupId', 'Group')->required()->options('user_groups.groupId.groupName');
             $input->text('email')->required()->unique()->validations('email');
@@ -42,36 +40,22 @@ class UsersController extends AdminController
     {
         // You can't simply change password and status of yourself
         if (Auth::user()->userId == $id) {
-            $this->crud->modify(function($input)
-            {
+            $this->crud->modify(function ($input) {
                 $input->remove('password');
                 $input->remove('status');
             });
-        }
-        else {
-            $this->crud->modify(function($input)
-            {
+        } else {
+            $this->crud->modify(function ($input) {
                 $input->modify('password')->required(false)->help("Leave the password blank, if you don't want to change");
             });
         }
-    }
-
-    public function index()
-    {
-        $this->setup();
-
-        $data['title'] = $this->title;
-
-        $data['page'] = $this->crud->index();
-
-        return $this->render('form-tool::list.index', $data);
     }
 
     public function bulkAction(Request $request)
     {
         $this->setup();
 
-        return $this->crud->bulkAction(function($id, $action) {
+        return $this->crud->bulkAction(function ($id, $action) {
             if ($action == 'delete') {
                 $response = $this->checkBeforeDelete($id);
                 if ($response === true) {
@@ -85,34 +69,11 @@ class UsersController extends AdminController
         });
     }
 
-    public function create(Request $request)
+    public function edit(Request $request, $id = null)
     {
         $this->setup();
 
-        $data['title'] = 'Add ' . $this->singularTitle;
-
-        $data['page'] = $this->crud->create();
-
-        return $this->render('form-tool::form.index', $data);
-    }
-
-    public function store(Request $request)
-    {
-        $this->setup();
-
-        return $this->crud->store();
-    }
-
-    public function show($id)
-    {
-        $this->setup();        
-    }
-
-    public function edit(Request $request, $id)
-    {
-        $this->setup();
-
-        $data['title'] = 'Edit ' . $this->singularTitle;
+        $data['title'] = 'Edit '.$this->singularTitle;
 
         $this->modifyEdit($id);
 
@@ -121,7 +82,7 @@ class UsersController extends AdminController
         return $this->render('form-tool::form.index', $data);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id = null)
     {
         $this->setup();
         $this->modifyEdit($id);
@@ -165,7 +126,7 @@ class UsersController extends AdminController
         return $response;
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id = null)
     {
         $this->setup();
 
@@ -211,14 +172,5 @@ class UsersController extends AdminController
         }
 
         return true;
-    }
-
-    public function search(Request $request)
-    {
-        $this->setup();
-
-        $result = $this->crud->search();
-
-        return $result;
     }
 }

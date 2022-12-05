@@ -13,9 +13,9 @@ class YesNoCheckbox extends CheckboxType implements ICustomType
     public function getTableValue()
     {
         if ($this->value == $this->valueYes) {
-            return '<span class="badge btn-success">'.  $this->captionYes .'</span>';
+            return '<span class="badge btn-success">'.$this->captionYes.'</span>';
         } else {
-            return '<span class="badge btn-danger">'. $this->captionNo .'</span>';
+            return '<span class="badge btn-danger">'.$this->captionNo.'</span>';
         }
     }
 }

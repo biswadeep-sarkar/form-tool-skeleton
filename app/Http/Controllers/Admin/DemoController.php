@@ -17,15 +17,14 @@ class DemoController extends AdminController
     public $route = 'demo-pages';
     public $singularTitle = 'Demo Page';
 
-    private $crud = null;
+    protected $crud = null;
 
     public function setup()
     {
         $model = new DataModel();
         $model->db('test', 'testID')->token('testToken');
-        
-        $this->crud = Doc::create($this, DemoModel::class, function(BluePrint $input)
-        {
+
+        $this->crud = Doc::create($this, DemoModel::class, function (BluePrint $input) {
             $input->text('title')->required();
             $input->text('slug')->slug();
             $input->textarea('content');
@@ -38,7 +37,7 @@ class DemoController extends AdminController
         })->run();
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $this->setup();
 
@@ -52,7 +51,7 @@ class DemoController extends AdminController
     public function bulkAction(Request $request)
     {
         $this->setup();
-        
+
         return $this->crud->bulkAction();
     }
 
@@ -60,7 +59,7 @@ class DemoController extends AdminController
     {
         $this->setup();
 
-        $data['title'] = 'Add ' . $this->singularTitle;
+        $data['title'] = 'Add '.$this->singularTitle;
 
         $data['page'] = $this->crud->create();
 
@@ -70,39 +69,39 @@ class DemoController extends AdminController
     public function store(Request $request)
     {
         $this->setup();
-        
+
         // Needed if you are not using run()
         // return $this->crud->store();
     }
 
-    public function show($id)
+    public function show(Request $request, $id = null)
     {
         $this->setup($id);
     }
 
-    public function edit(Request $request, $id)
+    public function edit(Request $request, $id = null)
     {
         $this->setup();
 
-        $data['title'] = 'Edit ' . $this->singularTitle;
+        $data['title'] = 'Edit '.$this->singularTitle;
 
         $data['page'] = $this->crud->edit($id);
 
         return $this->render('form-tool::form.index', $data);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id = null)
     {
         $this->setup();
-        
+
         // Needed if you are not using run()
         // return $this->crud->udpate($id);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id = null)
     {
         $this->setup();
-        
+
         // Needed if you are not using run()
         // return $this->crud->delete($id);
     }

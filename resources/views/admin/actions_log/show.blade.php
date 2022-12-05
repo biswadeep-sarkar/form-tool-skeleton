@@ -2,6 +2,7 @@
 .text-removed, .img-removed i {
     text-decoration: line-through;
     color:#dd4b39;
+    text-decoration-thickness: from-font;
 }
 .text-added, .img-added i {
     color:#00a65a;
@@ -11,6 +12,12 @@
 }
 .img-added img {
     border-color:#00a65a;
+}
+td img {
+	width: 100%;
+}
+.vertical-top {
+	vertical-align: top !important;
 }
 </style>
 
@@ -37,7 +44,7 @@
     <table class="table table-bordered table-hover">
         @foreach ($action->data['data'] as $label => $value)
             <tr>
-                <th>{{ $label }}</th>
+                <th class="vertical-top">{{ $label }}</th>
                 <td>
                     @if (! is_array($value))
                         {{ $value }}

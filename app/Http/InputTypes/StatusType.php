@@ -25,10 +25,9 @@ class StatusType extends SelectType implements ICustomType
         if (isset($this->options->{$this->value})) {
             $val = $this->options->{$this->value};
             if ($this->value == 1) {
-                return '<span class="badge btn-success">'. $val .'</span>';
-            }
-            else {
-                return '<span class="badge btn-danger">'. $val .'</span>';
+                return '<span class="badge btn-success">'.$val.'</span>';
+            } else {
+                return '<span class="badge btn-danger">'.$val.'</span>';
             }
         }
 

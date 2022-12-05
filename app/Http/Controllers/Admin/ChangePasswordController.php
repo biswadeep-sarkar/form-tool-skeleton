@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
 use Biswadeep\FormTool\Core\Doc;
 use Biswadeep\FormTool\Core\BluePrint;
 use Biswadeep\FormTool\Core\DataModel;
@@ -22,11 +21,10 @@ class ChangePasswordController extends AdminController
         $model = new DataModel();
         $model->db('users', 'userId');
 
-        Doc::create($this, $model, function(BluePrint $input)
-        {
+        Doc::create($this, $model, function (BluePrint $input) {
             $user = Auth::user();
 
-            $input->password('current', 'Current Password')->required()->validations([
+            $input->password('current_password', 'Current Password')->required()->validations([
                 function ($attribute, $value, $fail) use ($user) {
                     if (! \Hash::check($value, $user->password)) {
                         return $fail('The Current Password is incorrect.');
@@ -34,12 +32,11 @@ class ChangePasswordController extends AdminController
                 }
             ]);
             $input->password('password', 'New Password')->required()->validations('min:8');
-            $input->password('confirm', 'Confirm Password')->required()->validations('same:password');
-        
+            $input->password('password_confirmation', 'Confirm Password')->required()->validations('same:password');
         })->saveOnly('password')->actionLog(false);
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $this->setup();
 
@@ -52,7 +49,7 @@ class ChangePasswordController extends AdminController
         return $this->render('form-tool::form.index', $data);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id = null)
     {
         $this->setup();
 

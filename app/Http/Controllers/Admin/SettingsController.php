@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
 use Biswadeep\FormTool\Core\Doc;
 use Biswadeep\FormTool\Core\BluePrint;
 use Biswadeep\FormTool\Core\DataModel;
@@ -18,15 +17,14 @@ class SettingsController extends AdminController
     public $title = 'Settings';
     public $route = 'settings';
 
-    private $crud = null;
+    protected $crud = null;
 
     public function setup()
     {
         $model = new DataModel();
         $model->db('settings', 'id');
 
-        $this->crud = Doc::create($this, $model, function(BluePrint $input) 
-        {
+        $this->crud = Doc::create($this, $model, function (BluePrint $input) {
             $timezones = DTConverter::getTimezones();
 
             $sampleDate = strtotime(\date('2022-07-15'));
@@ -89,11 +87,10 @@ class SettingsController extends AdminController
 
             // $input->textarea('googleAnalyticsCode', 'Google Analytics Code');
             // $input->checkbox('dontTrackUs', "Don't Track Admin Users")->captions('');
-        
         })->format('keyValue', 'default');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $this->setup();
 
@@ -102,12 +99,5 @@ class SettingsController extends AdminController
         $data['page'] = $this->crud->edit();
 
         return $this->render('form-tool::form.index', $data);
-    }
-
-    public function update(Request $request)
-    {
-        $this->setup();
-
-        return $this->crud->update();
     }
 }

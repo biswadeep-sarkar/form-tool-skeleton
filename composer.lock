@@ -68,12 +68,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/biswadeep-sarkar/form-tool.git",
-                "reference": "85de0002b9222fbc9feb054df6fd17352f4838c7"
+                "reference": "39a4a8f787c0167fae81dd27a15ea70af53a923f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/biswadeep-sarkar/form-tool/zipball/85de0002b9222fbc9feb054df6fd17352f4838c7",
-                "reference": "85de0002b9222fbc9feb054df6fd17352f4838c7",
+                "url": "https://api.github.com/repos/biswadeep-sarkar/form-tool/zipball/39a4a8f787c0167fae81dd27a15ea70af53a923f",
+                "reference": "39a4a8f787c0167fae81dd27a15ea70af53a923f",
                 "shasum": ""
             },
             "require": {
@@ -112,7 +112,7 @@
                 "issues": "https://github.com/biswadeep-sarkar/form-tool/issues",
                 "source": "https://github.com/biswadeep-sarkar/form-tool/tree/main"
             },
-            "time": "2022-12-01T14:24:28+00:00"
+            "time": "2022-12-05T05:28:38+00:00"
         },
         {
             "name": "brick/math",
